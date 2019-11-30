@@ -1,0 +1,10 @@
+Command Injection:
+
+`command`  will execute command.
+$(command)  will execute command.
+; command  will execute command, and output result of command.
+| command  will execute command, and output result of command.
+&& command  will execute command, and output result of command.
+|| command will execute command, and output result of command.
+> /home/user/phpguru/.bashrc  will overwrite file .bashrc.
+< /home/user/phpguru/.bashrc  will send file .bashrc as input to funnytex
